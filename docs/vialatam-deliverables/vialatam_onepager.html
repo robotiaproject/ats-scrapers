@@ -1,0 +1,324 @@
+<title>VíaLatam · Auditoría y Rediseño</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  :root{
+    --ink:#2C3E50; --ink-2:#22303d; --ink-3:#1a2731;
+    --cream:#F5EDE8; --cream-2:#efe4db; --paper:#faf6f2;
+    --terra:#b8562f; --terra-soft:#c9764f;
+    --text:#25313c; --muted:#6b7681; --line:#e2d6cb;
+    --card:#ffffff; --card-line:#e9ddd2;
+    --crit:#b23a2e; --crit-bg:#f7e4e0;
+    --good:#2f7a55; --good-bg:#e3efe7;
+    --surface-dark:#2C3E50; --on-dark:#f0e9e2; --on-dark-muted:#a9b6c1;
+    --shadow:0 1px 2px rgba(44,62,80,.06),0 8px 24px rgba(44,62,80,.07);
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --ink:#0f1922; --ink-2:#0b131a; --ink-3:#080e13;
+      --cream:#12202b; --cream-2:#0e1a23; --paper:#0c161e;
+      --terra:#d9865f; --terra-soft:#c9764f;
+      --text:#e7ddd3; --muted:#93a1ad; --line:#243542;
+      --card:#16242f; --card-line:#253846;
+      --crit:#e8897c; --crit-bg:#2e1d1a;
+      --good:#7fc19d; --good-bg:#16281f;
+      --surface-dark:#0b1620; --on-dark:#e7ddd3; --on-dark-muted:#8b99a5;
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#0f1922; --ink-2:#0b131a; --ink-3:#080e13;
+    --cream:#12202b; --cream-2:#0e1a23; --paper:#0c161e;
+    --terra:#d9865f; --terra-soft:#c9764f;
+    --text:#e7ddd3; --muted:#93a1ad; --line:#243542;
+    --card:#16242f; --card-line:#253846;
+    --crit:#e8897c; --crit-bg:#2e1d1a;
+    --good:#7fc19d; --good-bg:#16281f;
+    --surface-dark:#0b1620; --on-dark:#e7ddd3; --on-dark-muted:#8b99a5;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    margin:0;background:var(--paper);color:var(--text);
+    font-family:"Public Sans",system-ui,sans-serif;font-size:17px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  h1,h2,h3{font-family:"Archivo",sans-serif;text-wrap:balance;margin:0;color:var(--ink);letter-spacing:-.01em}
+  .mono{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums}
+  .eyebrow{font-family:"Archivo",sans-serif;text-transform:uppercase;letter-spacing:.16em;
+    font-size:12px;font-weight:700;color:var(--terra)}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;background:var(--surface-dark);color:var(--on-dark);overflow:hidden;
+    border-bottom:3px solid var(--terra)}
+  .hero .wrap{position:relative;z-index:2;padding:64px 24px 68px}
+  .compass{position:absolute;right:-90px;top:50%;transform:translateY(-50%);
+    width:420px;height:420px;opacity:.13;z-index:1;color:var(--terra-soft)}
+  @media(max-width:720px){.compass{right:-160px;width:340px;height:340px}}
+  .hero h1{color:var(--on-dark);font-size:clamp(2.1rem,5.4vw,3.5rem);font-weight:800;line-height:1.04;max-width:16ch}
+  .hero .lede{color:var(--on-dark-muted);font-size:clamp(1.05rem,2.4vw,1.3rem);max-width:52ch;margin-top:20px}
+  .brandline{display:flex;align-items:center;gap:12px;margin-bottom:26px}
+  .brandmark{width:34px;height:34px;color:var(--terra-soft)}
+  .brandname{font-family:"Archivo",sans-serif;font-weight:800;letter-spacing:.02em;font-size:15px;color:var(--on-dark)}
+  .brandname b{color:var(--terra-soft);font-weight:800}
+  .tag{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--on-dark-muted);
+    border:1px solid rgba(255,255,255,.16);padding:5px 10px;border-radius:100px}
+  .verdict{margin-top:34px;display:inline-flex;flex-direction:column;gap:2px;
+    border-left:3px solid var(--terra);padding:4px 0 4px 18px}
+  .verdict .k{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--on-dark-muted)}
+  .verdict .v{font-family:"Archivo",sans-serif;font-weight:700;font-size:1.15rem;color:var(--on-dark)}
+
+  /* ---------- SECTION ---------- */
+  section{padding:56px 0}
+  .sec-head{display:flex;flex-direction:column;gap:10px;margin-bottom:30px}
+  .sec-head h2{font-size:clamp(1.5rem,3.4vw,2.05rem);font-weight:800}
+  .sec-head p{margin:0;color:var(--muted);max-width:60ch}
+
+  /* ---------- FINDINGS ---------- */
+  .findings{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+  .card{background:var(--card);border:1px solid var(--card-line);border-radius:14px;padding:22px;box-shadow:var(--shadow)}
+  .card .n{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;color:var(--muted)}
+  .card h3{font-size:1.12rem;font-weight:700;margin:8px 0 8px;line-height:1.25}
+  .card p{margin:0;font-size:.96rem;color:var(--text)}
+  .sev{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:10.5px;font-weight:600;
+    text-transform:uppercase;letter-spacing:.08em;padding:3px 9px;border-radius:100px;margin-bottom:14px}
+  .sev.c{background:var(--crit-bg);color:var(--crit)}
+  .sev.g{background:var(--good-bg);color:var(--good)}
+  .card.strength{border-color:color-mix(in srgb,var(--good) 40%,var(--card-line))}
+
+  /* ---------- ARITMÉTICA (dark block) ---------- */
+  .math{background:var(--surface-dark);color:var(--on-dark)}
+  .math .sec-head h2{color:var(--on-dark)}
+  .math .sec-head p{color:var(--on-dark-muted)}
+  .math .eyebrow{color:var(--terra-soft)}
+  .scen{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+  @media(max-width:720px){.scen{grid-template-columns:1fr}}
+  .scen .box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:22px}
+  .scen .box.hi{border-color:var(--terra);background:rgba(184,86,47,.12)}
+  .scen .lbl{font-size:.9rem;color:var(--on-dark-muted);min-height:2.6em}
+  .scen .big{font-family:"Archivo",sans-serif;font-weight:900;font-size:2.7rem;line-height:1;margin:14px 0 4px;color:var(--on-dark)}
+  .scen .hi .big{color:var(--terra-soft)}
+  .scen .unit{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--on-dark-muted)}
+  .scen .marg{margin-top:14px;font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--on-dark);
+    border-top:1px solid rgba(255,255,255,.12);padding-top:12px}
+  .math .note{margin-top:24px;font-size:.95rem;color:var(--on-dark-muted);max-width:64ch}
+  .math .note b{color:var(--terra-soft)}
+
+  /* ---------- REDESIGN ---------- */
+  .knife{display:grid;grid-template-columns:1.1fr 1fr;gap:28px;align-items:start}
+  @media(max-width:800px){.knife{grid-template-columns:1fr}}
+  .principle{background:var(--cream);border:1px solid var(--line);border-radius:16px;padding:28px}
+  .principle .q{font-family:"Archivo",sans-serif;font-weight:800;font-size:1.35rem;line-height:1.3;color:var(--ink)}
+  .principle .q em{color:var(--terra);font-style:normal}
+  .moves{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+  .moves li{display:flex;gap:14px;align-items:flex-start}
+  .moves .ic{flex:none;width:30px;height:30px;border-radius:8px;background:var(--cream-2);color:var(--terra);
+    display:grid;place-items:center;font-family:"Archivo";font-weight:800;font-size:14px;border:1px solid var(--line)}
+  .moves b{font-weight:600;color:var(--ink)}
+  .moves span{color:var(--muted);font-size:.95rem}
+
+  /* ---------- TIMELINE ---------- */
+  .plan{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:720px){.plan{grid-template-columns:1fr}}
+  .phase{background:var(--card);border:1px solid var(--card-line);border-radius:14px;padding:22px;box-shadow:var(--shadow);
+    position:relative;overflow:hidden}
+  .phase::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--terra);opacity:.7}
+  .phase .day{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:13px;color:var(--terra)}
+  .phase h3{font-size:1.05rem;margin:6px 0 10px}
+  .phase p{margin:0;font-size:.93rem;color:var(--muted)}
+  .phase .out{margin-top:14px;font-size:.85rem;font-family:"IBM Plex Mono",monospace;color:var(--text);
+    border-top:1px dashed var(--line);padding-top:12px}
+
+  /* ---------- DECISIONS ---------- */
+  .decisions{background:var(--cream);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .dec-list{counter-reset:d;display:flex;flex-direction:column;gap:18px;max-width:800px}
+  .dec{display:flex;gap:18px;align-items:flex-start}
+  .dec::before{counter-increment:d;content:counter(d);flex:none;width:40px;height:40px;border-radius:50%;
+    background:var(--ink);color:var(--cream);display:grid;place-items:center;font-family:"Archivo";font-weight:800}
+  .dec h3{font-size:1.1rem;margin:2px 0 4px}
+  .dec p{margin:0;color:var(--muted);font-size:.95rem}
+  .dec .rec{color:var(--good);font-weight:600}
+
+  footer{padding:40px 0 60px;color:var(--muted);font-size:.85rem}
+  footer .mono{font-size:12px}
+  .hr{height:1px;background:var(--line);border:0;margin:0}
+</style>
+
+<div class="hero">
+  <svg class="compass" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+    <circle cx="50" cy="50" r="46" stroke="currentColor" stroke-width="1.2"/>
+    <circle cx="50" cy="50" r="36" stroke="currentColor" stroke-width=".6"/>
+    <polygon points="50,10 56,50 50,54 44,50" fill="currentColor"/>
+    <polygon points="50,90 56,50 50,46 44,50" fill="currentColor" opacity=".45"/>
+    <polygon points="10,50 50,44 54,50 50,56" fill="currentColor" opacity=".7"/>
+    <polygon points="90,50 50,44 46,50 50,56" fill="currentColor" opacity=".7"/>
+    <circle cx="50" cy="50" r="3" fill="currentColor"/>
+  </svg>
+  <div class="wrap">
+    <div class="brandline">
+      <svg class="brandmark" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+        <circle cx="50" cy="50" r="44" stroke="currentColor" stroke-width="4"/>
+        <polygon points="50,14 58,50 50,56 42,50" fill="currentColor"/>
+        <polygon points="50,86 58,50 50,44 42,50" fill="currentColor" opacity=".4"/>
+      </svg>
+      <span class="brandname">Vía<b>Latam</b></span>
+      <span class="tag">Memo de operador · 25 ago 2026</span>
+    </div>
+    <div class="eyebrow">Auditoría &amp; rediseño estratégico</div>
+    <h1>No es un problema de capacidad. Es un problema de secuencia.</h1>
+    <p class="lede">Estás construyendo el piso 5 —marca v2.2, el sistema SAM-V, un currículo de 2.592 horas— antes de vender el piso 1: una sola reserva.</p>
+    <div class="verdict">
+      <span class="k">La pregunta que manda este trimestre</span>
+      <span class="v">¿Alguien paga hoy por resolver su migración a través de VíaLatam?</span>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Diagnóstico sin filtro</div>
+      <h2>Seis hallazgos que frenan el negocio</h2>
+      <p>Basado en tus propios documentos: arquitectura de marca, SAM-V Fase 0, cierre de la matriz de migración y proveedores aprobados.</p>
+    </div>
+    <div class="findings">
+      <div class="card"><span class="sev c">Crítico</span><div class="n">01</div>
+        <h3>Mucha infraestructura, cero evidencia de negocio</h3>
+        <p>Marca, sistema y currículo impecables. En ningún documento aparece una venta, un cliente o un peso de ingreso. La energía está en preparar, no en vender.</p></div>
+      <div class="card"><span class="sev c">Crítico</span><div class="n">02</div>
+        <h3>La sobreingeniería es un patrón</h3>
+        <p>Rechazaste una arquitectura de 8.854 líneas… construyendo otro sistema (SAM-V) con 10 subfases solo en su Fase 0. Se construye el sistema para construir el negocio.</p></div>
+      <div class="card"><span class="sev c">Crítico</span><div class="n">03</div>
+        <h3>Identidad partida en cuatro frentes</h3>
+        <p>Viagens, Academy, SAM-V y el giro migratorio compiten por el tiempo de 3 socios pre-ingresos. El foco es la única ventaja de un equipo pequeño; se está regalando.</p></div>
+      <div class="card"><span class="sev c">Crítico</span><div class="n">04</div>
+        <h3>La marca corre delante del producto</h3>
+        <p>Paleta, isologo y gobernanza aprobados antes de validar que alguien pague. La marca es un multiplicador, no un motor: por cero ventas da cero.</p></div>
+      <div class="card"><span class="sev c">Crítico</span><div class="n">05</div>
+        <h3>Meta financiera sin unidad económica</h3>
+        <p>R$1.000/día suena concreto, pero no hay modelo detrás. Con margen de aéreo suelto implicaría 7–10 ventas/día. Sin ese número, es un deseo, no un plan.</p></div>
+      <div class="card"><span class="sev c">Crítico</span><div class="n">06</div>
+        <h3>Bus factor = 1</h3>
+        <p>El propio SAM-V lo admite: todo depende de la memoria y supervisión de Pável. Si Pável para, la empresa para.</p></div>
+    </div>
+  </div>
+</section>
+
+<hr class="hr">
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">No todo es crítica</div>
+      <h2>Las fortalezas reales (tu punto de partida)</h2>
+    </div>
+    <div class="findings">
+      <div class="card strength"><span class="sev g">Activo</span>
+        <h3>Proveedores aprobados con acceso operativo</h3>
+        <p>Öner/BeFly, BDS, SkyTeam, Pátria, Comprar Viagem. Difícil de conseguir y listo para vender. Es tu mayor ventaja hoy.</p></div>
+      <div class="card strength"><span class="sev g">Activo</span>
+        <h3>Un nicho con dolor real</h3>
+        <p>La diáspora venezolana tiene urgencia, dolor intenso y disposición a pagar por asesoría migratoria.</p></div>
+      <div class="card strength"><span class="sev g">Activo</span>
+        <h3>Disciplina de ejecución excepcional</h3>
+        <p>La capacidad de documentar y gobernar es oro — solo hay que apuntarla a vender, no a archivar.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="math">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">La aritmética de la meta</div>
+      <h2>De "R$1.000/día" a ventas por semana</h2>
+      <p>Meta = R$1.000 de margen/día × 6 días ≈ R$26.000/mes. Cuántas ventas hacen falta depende del margen por venta:</p>
+    </div>
+    <div class="scen">
+      <div class="box"><div class="lbl">Solo aéreo (paquete Básico)</div>
+        <div class="big mono">12,5</div><div class="unit">ventas / día</div>
+        <div class="marg">margen ~R$80 · ❌ inviable orgánico</div></div>
+      <div class="box hi"><div class="lbl">Paquete Completo ⭐ (viaje + asesoría)</div>
+        <div class="big mono">4,0</div><div class="unit">ventas / día</div>
+        <div class="marg">margen ~R$250 · 🟡 perseguible</div></div>
+      <div class="box"><div class="lbl">Paquete Premium (reubicación acompañada)</div>
+        <div class="big mono">1,7</div><div class="unit">ventas / día</div>
+        <div class="marg">margen ~R$600 · 🟢 alcanzable</div></div>
+    </div>
+    <p class="note">La meta <b>no se alcanza vendiendo pasajes sueltos.</b> Se alcanza subiendo el margen por venta con asesoría migratoria. Cifras de ejemplo — se reemplazan con tus datos reales de proveedores.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">El rediseño</div>
+      <h2>Una empresa, un cuchillo afilado</h2>
+    </div>
+    <div class="knife">
+      <div class="principle">
+        <div class="q">Hasta cerrar las primeras <em>10 ventas</em>, todo lo que no ayude a vender esta semana se <em>congela.</em></div>
+        <ul class="moves" style="margin-top:22px">
+          <li><span class="ic">1</span><div><b>VíaLatam = viajes + reubicación para migrantes venezolanos.</b> <span>Ese es el producto. Punto.</span></div></li>
+          <li><span class="ic">2</span><div><b>Academy se congela como producto.</b> <span>Sobrevive solo como canal de contenido/captación.</span></div></li>
+          <li><span class="ic">3</span><div><b>SAM-V, a lo mínimo que acelera una venta.</b> <span>Un CRM en una hoja y 2–3 checklists. Nada de arquitectura agéntica aún.</span></div></li>
+        </ul>
+      </div>
+      <div>
+        <ul class="moves">
+          <li><span class="ic">→</span><div><b>Elige EL flujo piloto.</b> <span>El paquete "Reubicación Venezuela → Brasil" que tu propia Fase 0 pedía y nunca se escogió.</span></div></li>
+          <li><span class="ic">→</span><div><b>Capta donde ya está la diáspora.</b> <span>Grupos de WhatsApp/Facebook/TikTok; el imán es contenido de trámites, no una web bonita.</span></div></li>
+          <li><span class="ic">→</span><div><b>Roles de negocio, no de archivo.</b> <span>Cierre/atención · operación/proveedores · captación/contenido.</span></div></li>
+          <li><span class="ic">→</span><div><b>Congela marca y auditorías.</b> <span>La marca ya está suficientemente buena. Cero versiones nuevas hasta 10 ventas.</span></div></li>
+          <li><span class="ic">→</span><div><b>Tablero semanal de 6 números.</b> <span>Leads · conversaciones · cotizaciones · ventas · ingreso · margen.</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:8px">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Plan de 90 días</div>
+      <h2>Un objetivo por ventana</h2>
+    </div>
+    <div class="plan">
+      <div class="phase"><div class="day">Días 0–14</div>
+        <h3>Definir y abrir conversaciones</h3>
+        <p>Producto piloto, precio y unidad económica. Abrir 20 conversaciones reales.</p>
+        <div class="out">→ 1 oferta escrita · 1 pieza de captación · CRM en 1 hoja</div></div>
+      <div class="phase"><div class="day">Días 15–45</div>
+        <h3>Cerrar las primeras 10 ventas</h3>
+        <p>Cobrar 10 ventas del paquete Completo/Premium. Iterar la oferta con lo aprendido.</p>
+        <div class="out">→ 10 reservas reales · base de trámites de 3 destinos</div></div>
+      <div class="phase"><div class="day">Días 45–90</div>
+        <h3>Sistematizar lo que ya vende</h3>
+        <p>Convertir en repetible solo el flujo probado. Recién ahí decidir qué automatizar.</p>
+        <div class="out">→ guion de venta/emisión · decisión sobre SAM-V y Academy</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="decisions">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Lo que pediría hoy</div>
+      <h2>Tres decisiones para los socios</h2>
+    </div>
+    <div class="dec-list">
+      <div class="dec"><div><h3>¿Congelamos Academy y SAM-V como productos?</h3><p>Subordinarlos a "vender viajes migratorios" este trimestre. <span class="rec">Recomendación: sí.</span></p></div></div>
+      <div class="dec"><div><h3>¿Cuál es el producto piloto exacto y su precio?</h3><p><span class="rec">Recomendación:</span> el paquete Reubicación VE → Brasil, nivel Completo.</p></div></div>
+      <div class="dec"><div><h3>¿Quién es el dueño de las ventas a 90 días?</h3><p>Necesita un nombre — Pável, Greylys o Daniela — no "el equipo".</p></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>El activo más valioso no es la marca ni SAM-V: son los <b>proveedores aprobados + un nicho con dolor real.</b> Todo lo demás es ruido hasta la primera factura.</div>
+    <div class="mono" style="margin-top:12px">VíaLatam · documento interno para Pável, Greylys y Daniela</div>
+  </div>
+</footer>
